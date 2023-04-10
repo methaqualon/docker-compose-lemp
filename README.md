@@ -1,18 +1,20 @@
 # Docker Compose LEMP Stack
 
-This repository contains a little `docker-compose` configuration to start a `LEMP (Linux, Nginx, MariaDB, PHP)` stack.
+This repository contains a little `docker-compose` configuration to start a `LEMP (Linux, Nginx, MariaDB, PHP)` + PHPMyAdmin stack.
 
 ## Details
 
 The following versions are used.
 
-* PHP 7.2 (FPM) - With MySQLi driver optionally (Uncomment line from php.Dockerfile)
-* Nginx 1.13.6
+* PHP 8 (FPM) - With pdo_mysql driver (you can comment it on php.Dockerfile)
+* Nginx (latest)
 * MariaDB 10.3.9
+* PHPMyAdmin (latest)
 
 ## Configuration
 
 The Nginx configuration can be found in `config/nginx/`.
+Also there are another Nginx conf prepared for most of all php frameworks (just made "public" root dir)
 
 You can also set the following environment variables, for example in the included `.env` file:
 
@@ -27,20 +29,25 @@ To use it, simply follow the following steps:
 
 ##### Clone this repository.
 
-Clone this repository with the following command: `git clone https://github.com/stevenliebregt/docker-compose-lemp-stack.git`.
+Clone this repository with the following command: `git clone https://github.com/methaqualon/docker-compose-lemp.git`.
 
 ##### Start the server.
 
 Start the server using the following command inside the directory you just cloned: `docker-compose up`.
 
+##### You have edited (Dockerfile|docker-compose.yml|*.conf)
+
+Rebuild docker-compose network with all containers there: `docker-compose up --build`.
+
 ## Entering the containers
 
 You can use the following command to enter a container:
 
-Where `{CONTAINER_NAME}` is one of:
-
 `docker exec -ti {CONTAINER_NAME} /bin/bash`
 
-* `{APP_NAME}-php`
-* `{APP_NAME}-nginx`
-* `{APP_NAME}-mariadb`
+Where `{CONTAINER_NAME}` is one of:
+
+* `php`
+* `nginx`
+* `mariadb`
+* `pma`
